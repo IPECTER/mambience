@@ -15,7 +15,8 @@
  */
 package me.andre111.mambience.accessor;
 
-import com.github.ipecter.rtu.biomeAPI.RTUBiomeAPI;
+import com.github.ipecter.rtu.biomelib.RTUBiomeLib;
+import com.github.ipecter.rtu.nms.NMSInterface;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +32,7 @@ public class AccessorBukkit extends Accessor {
         super(playerUUID);
     }
 
+    public NMSInterface rtuBiomeLib = ((RTUBiomeLib) Bukkit.getPluginManager().getPlugin("RTUBiomeLib")).getInterface();
     // Player related methods
     @Override
     public boolean updatePlayerInstance() {
@@ -183,7 +185,7 @@ public class AccessorBukkit extends Accessor {
         //So, I use my api to do this work
 
         //return player.getWorld().getBiome(x, y, z).getKey().toString();
-        return RTUBiomeAPI.getInterface(Bukkit.getServer()).getBiomeName(new Location(player.getWorld(), x, y, z));
+        return rtuBiomeLib.getBiomeName(new Location(player.getWorld(), x, y, z));
     }
 
     @Override
@@ -229,7 +231,7 @@ public class AccessorBukkit extends Accessor {
 
         //Tag<Biome> tag = Bukkit.getTag("biomes", NamespacedKey.fromString(name), Biome.class);
         //return tag != null ? tag.getValues().stream().map(m -> m.getKey().toString()).collect(Collectors.toList()) : List.of();
-        List<String> tag = RTUBiomeAPI.getInterface(Bukkit.getServer()).getBiomesNameByFabricTag(name);
+        List<String> tag = rtuBiomeLib.getBiomesNameByFabricTag(name);
         return tag != null ? tag : List.of();
     }
 
