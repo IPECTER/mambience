@@ -45,6 +45,7 @@ dependencies {
     // Spigot stuff:
 	//implementation "org.spigotmc:spigot-api:${project.spigot_version}"
     compileOnly "org.spigotmc:spigot-api:${project.spigot_version}"
+	include fileTree(dir: 'libs', include: ['*.jar'])
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
